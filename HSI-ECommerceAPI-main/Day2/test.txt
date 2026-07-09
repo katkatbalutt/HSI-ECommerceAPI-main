@@ -1,0 +1,1 @@
+Hello, this file was written by Node.js!

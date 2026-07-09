@@ -1,0 +1,24 @@
+
+// Register a new user
+curl -Method POST -Uri http://localhost:3000/auth/register -Headers @{"Content-Type"="application/json"} -Body '{"name":"jason","email":"jason1@test.com","password":"nosajthing"}'
+
+// Login (returns JWT token)
+curl -Method POST -Uri http://localhost:3000/auth/login -Headers @{"Content-Type"="application/json"} -Body '{"email":"jason1@test.com","password":"nosajthing"}'
+
+// Get token (needs login)
+Invoke-WebRequest -Uri http://localhost:3000/auth/login -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"email":"jason1@test.com","password":"nosajthing"}'
+
+// Get current user profile (use token from login)
+curl -Method GET -Uri http://localhost:3000/auth/me -Headers @{"Authorization"="Bearer <TOKEN_HERE>"}
+
+// List users (protected - needs token)
+curl -Method GET -Uri http://localhost:3000/users -Headers @{"Authorization"="Bearer <TOKEN_HERE>"}
+
+// List tasks (protected - needs token)
+curl -Method GET -Uri http://localhost:3000/tasks -Headers @{"Authorization"="Bearer <TOKEN_HERE>"}
+
+// Bad login (wrong password)
+curl -Method POST -Uri http://localhost:3000/auth/login -Headers @{"Content-Type"="application/json"} -Body '{"email":"jason1@test.com","password":"bingbong"}'
+
+// No token (should get 401)
+curl -Method GET -Uri http://localhost:3000/users

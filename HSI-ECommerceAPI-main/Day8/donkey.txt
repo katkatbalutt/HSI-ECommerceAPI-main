@@ -1,0 +1,15 @@
+
+// Lists all users
+curl http://localhost:3000/users
+
+// Lists all tasks
+curl http://localhost:3000/tasks
+
+// Valid User
+curl -Method POST -Uri http://localhost:3000/users -Headers @{"Content-Type"="application/json"} -Body '{"name":"Alice","email":"alice@test.com"}'
+
+// Bad User (missing name + email)
+curl -Method POST -Uri http://localhost:3000/users -Headers @{"Content-Type"="application/json"} -Body '{"email":"bad"}'
+
+// Test Validation (title missing task)
+curl -Method POST -Uri http://localhost:3000/tasks -Headers @{"Content-Type"="application/json"} -Body '{"completed":"notabool"}'
