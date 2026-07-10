@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const { body, param, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
@@ -6,6 +7,10 @@ const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const app = express();
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 const port = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
